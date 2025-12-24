@@ -31,7 +31,7 @@ test('Third Testcase: Locators: Invalid login', async ({ page }) => {
     expect(errorMsg).toContain('Incorrect');  // 'await' has no effect on the type of this expression.
 });
 
-test.only('Fourth Testcase: Locators: Invalid+Valid login', async ({ page }) => { 
+test('Fourth Testcase: Locators: Invalid+Valid login', async ({ page }) => { 
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
 
     // locator variables, for reuse.
@@ -59,4 +59,15 @@ test.only('Fourth Testcase: Locators: Invalid+Valid login', async ({ page }) => 
     // Reason: Array can be empty or can have elements.
     // Be catious while using allTextContents(), page could load, but the method immediately retuns empty array.
     console.log("\n" + await cardTitles.allTextContents());   // all web elements titles
+});
+
+test('005TC: Handling Static Dropdown', async ({ page }) => { 
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+
+    // locator variables, for reuse.
+    const dropdown = page.locator('select.form-control');
+    dropdown.selectOption('consult');   // selects based on value attribute value
+
+    // assert selection
+    await expect(dropdown).toHaveValue('consult');
 });
