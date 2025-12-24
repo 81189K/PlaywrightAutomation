@@ -71,3 +71,21 @@ test('005TC: Handling Static Dropdown', async ({ page }) => {
     // assert selection
     await expect(dropdown).toHaveValue('consult');
 });
+
+test('006TC: Handling radio buttons', async ({ page }) => { 
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+
+    // radio button
+    await page.locator('.radiotextsty').last().click();
+
+    // pop-up
+    await page.locator('#okayBtn').click();
+
+    // assertion: toBeChecked()
+    await expect(page.locator('.radiotextsty').last()).toBeChecked();
+
+    // assertion: isChecked: returns boolean value
+    const ischecked = await page.locator('.radiotextsty').last().isChecked();
+    expect(ischecked).toBeTruthy();
+});
+
