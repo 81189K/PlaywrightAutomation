@@ -45,4 +45,12 @@ test.only('Fourth Testcase: Locators: Invalid+Valid login', async ({ page }) => 
     await signIn.click();
     // validate error msg
     await expect(page.locator("[style*='block']")).toContainText('Incorrect');  // await expect(locator).toContainText("abc");
+
+    await username.fill(""); // clears the username input field
+    await username.fill('rahulshettyacademy');  // enter correct username
+    await signIn.click();   // click signin
+
+    console.log(await page.locator('.card-body a').first().textContent());  // first web element
+    console.log(await page.locator('.card-body a').nth(1).textContent());   // second, third,.. use nth()
+    console.log(await page.locator('.card-body a').last().textContent());   // last web element
 });
