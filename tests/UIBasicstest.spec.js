@@ -39,4 +39,10 @@ test.only('Fourth Testcase: Locators: Invalid+Valid login', async ({ page }) => 
     const password = page.locator('input[type="password"]');
     const signIn = page.locator('#signInBtn');
 
+    // Invalid login
+    await username.fill('rahulshettyacademy1');
+    await password.fill('learning');
+    await signIn.click();
+    // validate error msg
+    await expect(page.locator("[style*='block']")).toContainText('Incorrect');  // await expect(locator).toContainText("abc");
 });
