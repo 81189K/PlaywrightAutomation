@@ -89,3 +89,35 @@ test('006TC: Handling radio buttons', async ({ page }) => {
     expect(ischecked).toBeTruthy();
 });
 
+test('007TC: Handling checkboxes', async ({ page }) => { 
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+
+    // checkbox locator
+    const checkBox = page.locator('#terms');
+
+    // click() just toggles
+    // check() -BEST PRACTICE
+    /***
+     * Ensures the checkbox ends up checked
+     * If already checked → does nothing
+     * If unchecked → checks it
+     * Waits for checkbox to be visible, enabled, and stable
+     * Fails if the element is not a checkbox
+     */
+    await checkBox.check();
+    console.log("checkBox is checked");
+
+    // assertion: toBeChecked()
+    await expect(checkBox).toBeChecked();
+    console.log("checked assertion passed");
+
+    // uncheck()
+    await checkBox.uncheck();
+    console.log("checkBox is unchecked");
+
+    // assertion: isChecked: returns boolean value
+    const ischecked = await checkBox.isChecked();
+    expect(ischecked).toBeFalsy();
+    console.log("uncheck assertion passed");
+});
+
