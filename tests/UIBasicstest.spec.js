@@ -8,9 +8,20 @@ test('First Testcase: Browser Context Playwright test', async ({ browser }) => {
     await page.goto('https://www.saucedemo.com/');
 });
 
-test.only('Second Testcase: Page Fixture Playwright test', async ({ page }) => { 
+test('Second Testcase: Page Fixture Playwright test', async ({ page }) => { 
     await page.goto('https://google.com/'); // creates a new page in default browser context
     const pageTitle = await page.title();
     console.log("Page Title is: " + pageTitle);
     await expect(page).toHaveTitle("Google"); //Assertion to verify the page title contains 'Google'
+});
+
+test.only('Third Testcase: Locators: Invalid login', async ({ page }) => { 
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+    const pageTitle = await page.title();
+    console.log("Page Title is: " + pageTitle);
+    
+    // locator: selectors= css, xpath
+    await page.locator('#username').fill('rahulshettyacademy1'); // type() is deprecated, so use: fill()
+    await page.locator('input[type="password"]').fill('learning');
+    await page.locator('#signInBtn').click();
 });
