@@ -1,4 +1,4 @@
-const { test } = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 //Imports test function/annotation from Playwright test  module.
 
 test('First Testcase: Browser Context Playwright test', async ({ browser }) => { //global fixture: browser, context, page (ensure to warp inside {})
@@ -8,6 +8,9 @@ test('First Testcase: Browser Context Playwright test', async ({ browser }) => {
     await page.goto('https://www.saucedemo.com/');
 });
 
-test('Second Testcase: Page Fixture Playwright test', async ({ page }) => { 
+test.only('Second Testcase: Page Fixture Playwright test', async ({ page }) => { 
     await page.goto('https://google.com/'); // creates a new page in default browser context
+    const pageTitle = await page.title();
+    console.log("Page Title is: " + pageTitle);
+    await expect(page).toHaveTitle("Google"); //Assertion to verify the page title contains 'Google'
 });
