@@ -24,4 +24,8 @@ test.only('Third Testcase: Locators: Invalid login', async ({ page }) => {
     await page.locator('#username').fill('rahulshettyacademy1'); // type() is deprecated, so use: fill()
     await page.locator('input[type="password"]').fill('learning');
     await page.locator('#signInBtn').click();
+
+    // auto-wait
+    const errorMsg = await page.locator("[style*='block']").textContent();  // to extract text from an element: textContent()
+    console.log(errorMsg);
 });
