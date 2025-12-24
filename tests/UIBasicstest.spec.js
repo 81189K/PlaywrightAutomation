@@ -58,5 +58,5 @@ test.only('Fourth Testcase: Locators: Invalid+Valid login', async ({ page }) => 
     // NOTE: textContent() will auto-wait for elements to load; allTextContents() does not have such auto-wait.
     // Reason: Array can be empty or can have elements.
     // Be catious while using allTextContents(), page could load, but the method immediately retuns empty array.
-    console.log("\n" + await cardTitles.allTextContents());   // last web element
+    console.log("\n" + await cardTitles.allTextContents());   // all web elements titles
 });
