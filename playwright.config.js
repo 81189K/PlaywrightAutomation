@@ -15,7 +15,8 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     // browserName: 'chromium'
-    browserName: 'firefox'
+    browserName: 'firefox',
+    headless: false // by default, its true. Explicitly making it as false
   },
 
 
