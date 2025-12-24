@@ -121,3 +121,13 @@ test('007TC: Handling checkboxes', async ({ page }) => {
     console.log("uncheck assertion passed");
 });
 
+test('008TC: Blinking text assertion', async ({ page }) => { 
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+
+    // Blinking text locator
+    const blinkingText = page.locator("[href*='documents-req']");
+
+    // assertion - toHaveAttribute()
+    await expect(blinkingText).toHaveAttribute('class', 'blinkingText');
+    console.log("blinkingText assertion passed");
+});
