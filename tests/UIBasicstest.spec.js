@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect, chromium } = require('@playwright/test');
 //Imports test function/annotation from Playwright test  module.
 
 test('First Testcase: Browser Context Playwright test', async ({ browser }) => { //global fixture: browser, context, page (ensure to warp inside {})
@@ -130,4 +130,37 @@ test('008TC: Blinking text assertion', async ({ page }) => {
     // assertion - toHaveAttribute()
     await expect(blinkingText).toHaveAttribute('class', 'blinkingText');
     console.log("blinkingText assertion passed");
+});
+
+test.only('009TC: Handling child windows', async () => { 
+    const browser = await chromium.launch();
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+
+    // Blinking text locator
+    const blinkingLink = page.locator("[href*='documents-req']");
+    
+    // Before clicking, inform about wait for an event of new page.
+    const [childPage] = await Promise.all([ context.waitForEvent('page'), blinkingLink.click() ]);  // run asyn steps until all promises are fulfilled
+    
+    // child page
+    const text = await childPage.locator('p.red').textContent();
+    console.log(text);
+    const userName = text.split("@")[1].split(".")[0];
+    console.log("userName: " + userName);
+    await childPage.waitForTimeout(2000);
+    await childPage.close();
+
+    // parent
+    await page.locator('#username').fill(userName);
+    await page.waitForTimeout(2000);
+    await page.locator('input[type="password"]').fill('learning');
+    await page.waitForTimeout(2000);
+    await page.locator('#signInBtn').click();
+    await page.waitForTimeout(5000);
+    
+    await expect(page).toHaveTitle("ProtoCommerce");
+    console.log("login successful");
 });
