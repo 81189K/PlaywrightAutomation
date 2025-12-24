@@ -38,6 +38,7 @@ test.only('Fourth Testcase: Locators: Invalid+Valid login', async ({ page }) => 
     const username = page.locator('#username');
     const password = page.locator('input[type="password"]');
     const signIn = page.locator('#signInBtn');
+    const cardTitles = page.locator('.card-body a');
 
     // Invalid login
     await username.fill('rahulshettyacademy1');
@@ -50,7 +51,12 @@ test.only('Fourth Testcase: Locators: Invalid+Valid login', async ({ page }) => 
     await username.fill('rahulshettyacademy');  // enter correct username
     await signIn.click();   // click signin
 
-    console.log(await page.locator('.card-body a').first().textContent());  // first web element
-    console.log(await page.locator('.card-body a').nth(1).textContent());   // second, third,.. use nth()
-    console.log(await page.locator('.card-body a').last().textContent());   // last web element
+    console.log(await cardTitles.first().textContent());  // first web element
+    console.log(await cardTitles.nth(1).textContent());   // second, third,.. use nth()
+    console.log(await cardTitles.last().textContent());   // last web element
+
+    // NOTE: textContent() will auto-wait for elements to load; allTextContents() does not have such auto-wait.
+    // Reason: Array can be empty or can have elements.
+    // Be catious while using allTextContents(), page could load, but the method immediately retuns empty array.
+    console.log("\n" + await cardTitles.allTextContents());   // last web element
 });
