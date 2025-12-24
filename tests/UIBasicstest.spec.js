@@ -156,6 +156,11 @@ test.only('009TC: Handling child windows', async () => {
     // parent
     await page.locator('#username').fill(userName);
     await page.waitForTimeout(2000);
+    // inputValue example -START
+    const enteredText = await page.locator('#username').inputValue(); 
+    expect(enteredText).toEqual(userName);
+    console.log("usernames matched");
+    // inputValue example - END
     await page.locator('input[type="password"]').fill('learning');
     await page.waitForTimeout(2000);
     await page.locator('#signInBtn').click();
