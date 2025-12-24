@@ -28,4 +28,5 @@ test.only('Third Testcase: Locators: Invalid login', async ({ page }) => {
     // auto-wait
     const errorMsg = await page.locator("[style*='block']").textContent();  // to extract text from an element: textContent()
     console.log(errorMsg);
+    expect(errorMsg).toContain('Incorrect');  // 'await' has no effect on the type of this expression.
 });
