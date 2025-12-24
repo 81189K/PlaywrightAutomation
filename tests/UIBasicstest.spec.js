@@ -15,7 +15,7 @@ test('Second Testcase: Page Fixture Playwright test', async ({ page }) => {
     await expect(page).toHaveTitle("Google"); //Assertion to verify the page title contains 'Google'
 });
 
-test.only('Third Testcase: Locators: Invalid login', async ({ page }) => { 
+test('Third Testcase: Locators: Invalid login', async ({ page }) => { 
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
     const pageTitle = await page.title();
     console.log("Page Title is: " + pageTitle);
@@ -29,4 +29,14 @@ test.only('Third Testcase: Locators: Invalid login', async ({ page }) => {
     const errorMsg = await page.locator("[style*='block']").textContent();  // to extract text from an element: textContent()
     console.log(errorMsg);
     expect(errorMsg).toContain('Incorrect');  // 'await' has no effect on the type of this expression.
+});
+
+test.only('Fourth Testcase: Locators: Invalid+Valid login', async ({ page }) => { 
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+
+    // locator variables, for reuse.
+    const username = page.locator('#username');
+    const password = page.locator('input[type="password"]');
+    const signIn = page.locator('#signInBtn');
+
 });
