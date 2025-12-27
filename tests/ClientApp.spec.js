@@ -30,7 +30,7 @@ test('First Testcase: Client App login', async ({ page }) => {
     console.log(await cardTitles.allTextContents());    
 });
 
-test.only('002TC: Client App E2E flow', async ({ page }) => { 
+test('002TC: Client App E2E flow', async ({ page }) => { 
     await page.goto('https://rahulshettyacademy.com/client');
 
     // locator variables, for reuse.
@@ -115,5 +115,50 @@ test.only('002TC: Client App E2E flow', async ({ page }) => {
     expect(orderID).toContain(await page.locator("div.col-text").textContent());
     console.log(await page.locator("div.col-text").innerText());
     // expect(orderID.includes(await page.locator("div.col-text").textContent())).toBeTruthy();
+    console.log("TEST PASSED");
+});
+
+test.only('003TC: Client App E2E flow using Playwright special Locators', async ({ page }) => { 
+    await page.goto('https://rahulshettyacademy.com/client');
+
+    // locator variables, for reuse.
+    const emaiID = 'testerone@email.com';
+    const products = page.locator('.card-body');
+    const cardTitles = page.locator('.card-body b');
+
+    // login
+    await page.getByPlaceholder("email@example.com").fill(emaiID);
+    await page.getByPlaceholder("enter your passsword").fill('testerOne1');
+    await page.getByRole("button", {name: "loGin"}).click();
+
+    // waitFor() waits for single element; so using first()
+    await cardTitles.first().waitFor(); // waits for specified element is loaded on the page.
+    
+    // add to cart
+    const requiredProduct = "ADIDAS ORIGINAL";
+    await products.filter({hasText: "ADIDAS"}).getByRole("button", {name: "Add to cart"}).click();  // regex check; Add to cart == Add to Cart == Add to CART
+
+    // My Cart
+    await page.getByRole("listitem").getByRole("button", {name: "Cart"}).click();
+
+    //wait for items to load
+    await page.locator(".cart li").first().waitFor();
+
+    // check cart
+    await expect(page.getByText(requiredProduct)).toBeVisible();
+
+    // Checkout
+    await page.getByRole("button", {name: "Checkout"}).click();
+
+    // Handling auto suggestive dropdown
+    await page.getByPlaceholder('Select Country').pressSequentially("ind", {delay: 150});
+    await page.getByRole("button", {name: "India"}).nth(1).click();
+
+    // place order btn
+    await page.getByText("Place Order").click();
+
+    //  Thankyou for the order. 
+    // assert Thankyou msg
+    await expect(page.getByText("Thankyou")).toBeVisible();
     console.log("TEST PASSED");
 });
