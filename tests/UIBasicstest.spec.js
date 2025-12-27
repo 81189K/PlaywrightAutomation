@@ -231,3 +231,14 @@ test('012TC: More UI validations', async ({ page }) => {
     // expect(await page.locator("#displayed-text").isVisible()).toBeFalsy();
     await expect(page.locator("#displayed-text")).toBeHidden();
 });
+
+test.only('013TC: Handling JS alert popups + hover', async ({ page }) => {
+    await page.goto('https://rahulshettyacademy.com/AutomationPractice/');
+    
+    // JS alert popup
+    page.on("dialog", dialog => dialog.accept());   // accept, dismiss
+    await page.locator("#confirmbtn").click();
+
+    //hover
+    await page.locator("#mousehover").hover();
+});
