@@ -217,3 +217,17 @@ test('011TC: Handling Calendar', async ({ page }) => {
     // }
     // console.log("done");
 });
+
+test('012TC: More UI validations', async ({ page }) => {
+    await page.goto('https://rahulshettyacademy.com/AutomationPractice/');
+    // await page.goto("https://google.com");
+    // await page.goBack();
+    // await page.goForward();
+
+    // toBeVisible
+    await expect(page.locator("#displayed-text")).toBeVisible();
+    await page.locator("#hide-textbox").click();
+    // toBeHidden
+    // expect(await page.locator("#displayed-text").isVisible()).toBeFalsy();
+    await expect(page.locator("#displayed-text")).toBeHidden();
+});
