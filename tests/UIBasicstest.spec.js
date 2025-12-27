@@ -132,7 +132,7 @@ test('008TC: Blinking text assertion', async ({ page }) => {
     console.log("blinkingText assertion passed");
 });
 
-test.only('009TC: Handling child windows', async () => { 
+test('009TC: Handling child windows', async () => { 
     const browser = await chromium.launch();
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -168,4 +168,23 @@ test.only('009TC: Handling child windows', async () => {
     
     await expect(page).toHaveTitle("ProtoCommerce");
     console.log("login successful");
+});
+
+test('010TC: Playwright special locators', async ({ page }) => {
+    await page.goto('https://rahulshettyacademy.com/angularpractice/');
+
+    //getByLabel
+    await page.getByLabel("Check me out if you Love IceCreams!").check();
+    await page.getByLabel("Gender").selectOption("Female");
+    await page.getByLabel("Employed").check();
+
+    await page.getByPlaceholder("Password").fill("asdf"); // getByPlaceholder
+
+    await page.getByRole("button", { name: "Submit" }).click(); // getByRole
+
+    expect(await page.getByText("Success! The Form has been submitted successfully!.").isVisible()).toBeTruthy();    // getByText
+
+    await page.getByRole("link", { name: "Shop" }).click(); // getByRole
+
+    await page.locator("app-card").filter({hasText: "Nokia"}).getByRole("button").click();  // filter, getByRole
 });
