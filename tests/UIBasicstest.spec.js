@@ -232,7 +232,7 @@ test('012TC: More UI validations', async ({ page }) => {
     await expect(page.locator("#displayed-text")).toBeHidden();
 });
 
-test.only('013TC: Handling JS alert popups + hover', async ({ page }) => {
+test('013TC: Handling JS alert popups + hover', async ({ page }) => {
     await page.goto('https://rahulshettyacademy.com/AutomationPractice/');
     
     // JS alert popup
@@ -241,4 +241,19 @@ test.only('013TC: Handling JS alert popups + hover', async ({ page }) => {
 
     //hover
     await page.locator("#mousehover").hover();
+});
+
+test('014TC: Handling Frames - frameLocator()', async ({ page }) => {
+    await page.goto('https://rahulshettyacademy.com/AutomationPractice/');
+    
+    // frameLocator
+    const framesPage = page.frameLocator("#courses-iframe");
+    await framesPage.locator("nav [href='/ai-learning-path']").click();
+    // :visible
+    //when multiple (visible + hidden results found), use :visible (i.e., to filter out hihhen/ invisible)
+    // await framesPage.locator("li [href='/ai-learning-path']:visible").click();
+    console.log(await framesPage.locator("div h1").textContent());
+
+    await page.locator("#opentab").click();
+    console.log("DONE");
 });
