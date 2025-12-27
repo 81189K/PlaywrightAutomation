@@ -188,3 +188,32 @@ test('010TC: Playwright special locators', async ({ page }) => {
 
     await page.locator("app-card").filter({hasText: "Nokia"}).getByRole("button").click();  // filter, getByRole
 });
+
+test('011TC: Handling Calendar', async ({ page }) => {
+    const month = "06";
+    const date = "15";
+    const year = "2027";
+    const expectedList = [month, date, year];
+
+    await page.goto('https://rahulshettyacademy.com/seleniumPractise/#/offers');
+
+    await page.locator(".react-date-picker__inputGroup").click();
+    await page.locator(".react-calendar__navigation__label").click();
+    await page.locator(".react-calendar__navigation__label").click();
+
+    await page.getByText(year).click();
+    await page.locator(".react-calendar__year-view__months__month").nth(Number(month)-1).click();
+    await page.locator("//abbr[text()='"+date+"']").click();
+
+    // assert
+    const actualDate = await page.locator(".react-date-picker__inputGroup input[name='date']").getAttribute('value');
+    const expectedDate = year+"-"+month+"-"+date;
+    expect(actualDate).toEqual(expectedDate);
+    console.log("PASS: " + expectedDate);
+
+    // const inputs = page.locator(".react-date-picker__inputGroup input");
+    // for(let i=1; i<=expectedList.length; i++){
+    //     expect(await inputs.nth(i).inputValue()).toEqual(expectedList[i-1]);
+    // }
+    // console.log("done");
+});
