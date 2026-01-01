@@ -25,3 +25,18 @@ test.beforeAll(async () => {
     loginToken = loginResponseJSON.token;
     console.log(loginToken);
 });
+
+test('First Testcase: Client App login API test', async ({ page }) => {
+    // set token in localStorage
+    page.addInitScript(value => {
+        window.localStorage.setItem('token', value);
+    }, loginToken);
+
+    await page.goto('https://rahulshettyacademy.com/client');
+    const pageTitle = await page.title();
+    console.log("Page Title is: " + pageTitle);
+
+    // locator variables, for reuse.
+    const cardTitles = page.locator('.card-body b');
+    console.log(await cardTitles.allTextContents());
+});
