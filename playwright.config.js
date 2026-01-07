@@ -14,6 +14,7 @@ export default defineConfig({
  
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    ignoreHTTPSErrors: true,
     browserName: 'chromium',
     // browserName: 'firefox',
     screenshot: 'on',
