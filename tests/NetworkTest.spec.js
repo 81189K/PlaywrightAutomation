@@ -72,3 +72,29 @@ test('001TC: Intercepted network response calls with playwright route() method',
     await expect(page.locator('.mt-4')).toContainText('No Orders');
     console.log(await page.locator(".mt-4").textContent());
 });
+
+test('002TC: Security test for network request intercept', async ({ page }) => {
+    // set token in localStorage
+    page.addInitScript(value => {
+        window.localStorage.setItem('token', value);
+    }, createdOrderDetails.loginToken);
+
+    await page.goto('https://rahulshettyacademy.com/client');
+    
+    // My Orders
+    await page.locator("button[routerlink='/dashboard/myorders']").click();
+    
+    // Intercept the Request
+    // Refer: https://playwright.dev/docs/api/class-route
+    await page.route("https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=*",
+        route => route.continue( // continue(): to intercept/modify API request calls(headers, url,...)
+            { 
+                url: 'https://rahulshettyacademy.com/api/ecom/order/get-orders-details?id=asdf1234' // wrong ID
+            })
+    );
+
+    // View button
+    await page.locator("button:has-text('View')").first().click();
+    await expect(page.locator("p").last()).toHaveText("You are not authorize to view this order");
+    console.log("Successfully intercepted network request url with playwright route() method.");
+});
