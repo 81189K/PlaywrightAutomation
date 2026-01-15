@@ -118,7 +118,7 @@ test('002TC: Client App E2E flow', async ({ page }) => {
     console.log("TEST PASSED");
 });
 
-test.only('003TC: Client App E2E flow using Playwright special Locators', async ({ page }) => { 
+test('003TC: Client App E2E flow using Playwright special Locators', async ({ page }) => { 
     await page.goto('https://rahulshettyacademy.com/client');
 
     // locator variables, for reuse.
