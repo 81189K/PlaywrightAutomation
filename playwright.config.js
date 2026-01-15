@@ -14,6 +14,10 @@ export default defineConfig({
  
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    // viewport: null, // Disable viewport (true window size)
+    // launchOptions: {
+    //   args: ['--start-maximized'], //Passes a Chromium launch flag. Instructs the browser to start maximized at OS level. Works for: CR, Edge. Not supported by Firefox/WebKit.
+    // },
     ignoreHTTPSErrors: true,
     browserName: 'chromium',
     // browserName: 'firefox',

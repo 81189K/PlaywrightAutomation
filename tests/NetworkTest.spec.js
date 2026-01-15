@@ -100,6 +100,9 @@ test('002TC: Security test for network request intercept', async ({ page }) => {
 });
 
 test('003TC: Abort Network calls', async ({ page }) => { 
+    await page.setViewportSize({ width: 1920, height: 1080 }); // Run with full available screen: Deterministic, CI-friendly, Cross-browser stable
+    // can configure the same in config.js file
+    // BEST PRACTICE: use setViewportSize()
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
 
     // locator variables, for reuse.
@@ -111,8 +114,8 @@ test('003TC: Abort Network calls', async ({ page }) => {
     //abort
     page.route('**/*.{jpg, png, jpeg}', route => route.abort()); //**/*.{jpg, png, jpeg} --any url ending with given extensions
 
-    page.on('request', request=> console.log("REQUEST: "+ request.url()));   // log all request call urls
-    page.on('response', response=> console.log("RESPONSE: "+ response.url(), response.status()));   // log all response call urls & response status codes
+    // page.on('request', request=> console.log("REQUEST: "+ request.url()));   // log all request call urls
+    // page.on('response', response=> console.log("RESPONSE: "+ response.url(), response.status()));   // log all response call urls & response status codes
 
     // login
     await username.fill('rahulshettyacademy');
