@@ -24,21 +24,21 @@ class APIUtils {
     }
 
     async createOrder(orderPayload) {
-        let jsObject = {}; // empty javascript object
-        jsObject.loginToken = await this.getToken();    // add loginToken property to response javascript object
+        let orderDetails = {}; // empty javascript object (to return two values)
+        orderDetails.loginToken = await this.getToken();    // add loginToken property to orderDetails javascript object
         const orderResponse = await this.apiContext.post("https://rahulshettyacademy.com/api/ecom/order/create-order",
             {
                 data: orderPayload,
                 headers: {
-                    'Authorization': jsObject.loginToken,
+                    'Authorization': orderDetails.loginToken,
                     'Content-Type': 'application/json'
                 }
             }
         );
         expect(orderResponse.ok()).toBeTruthy();
         const orderResponseJSON = await orderResponse.json();
-        jsObject.orderID = orderResponseJSON.orders[0]; // add orderID property to response javascript object
-        return jsObject;
+        orderDetails.orderID = orderResponseJSON.orders[0]; // add orderID property to orderDetails javascript object
+        return orderDetails; // return the javascript object, which has loginToken and created order ID.
     }
 
 }
