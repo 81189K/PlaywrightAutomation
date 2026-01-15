@@ -248,10 +248,10 @@ test('014TC: Handling Frames - frameLocator()', async ({ page }) => {
     
     // frameLocator
     const framesPage = page.frameLocator("#courses-iframe");
-    await framesPage.locator("nav [href='/ai-learning-path']").click();
+    // await framesPage.locator("nav [href='lifetime-access']").click();
     // :visible
     //when multiple (visible + hidden results found), use :visible (i.e., to filter out hihhen/ invisible)
-    // await framesPage.locator("li [href='/ai-learning-path']:visible").click();
+    await framesPage.locator("nav [href='lifetime-access']:visible").click();
     console.log(await framesPage.locator("div h1").textContent());
 
     await page.locator("#opentab").click();
