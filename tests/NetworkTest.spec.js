@@ -98,3 +98,23 @@ test('002TC: Security test for network request intercept', async ({ page }) => {
     await expect(page.locator("p").last()).toHaveText("You are not authorize to view this order");
     console.log("Successfully intercepted network request url with playwright route() method.");
 });
+
+test('003TC: Abort Network calls', async ({ page }) => { 
+    await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
+
+    // locator variables, for reuse.
+    const username = page.locator('#username');
+    const password = page.locator('input[type="password"]');
+    const signIn = page.locator('#signInBtn');
+    const cardTitles = page.locator('.card-body a');
+
+    //abort
+    page.route('**/*.{jpg, png, jpeg}', route => route.abort()); //**/*.{jpg, png, jpeg} --any url ending with given extensions
+
+    // login
+    await username.fill('rahulshettyacademy');
+    await password.fill('learning');
+    await signIn.click();
+    await page.pause();
+    console.log("Successfully aborted network calls ending with {jpg, png, jpeg} extensions");   // loaded page without product images.
+});
