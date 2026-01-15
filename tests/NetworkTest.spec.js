@@ -111,10 +111,12 @@ test('003TC: Abort Network calls', async ({ page }) => {
     //abort
     page.route('**/*.{jpg, png, jpeg}', route => route.abort()); //**/*.{jpg, png, jpeg} --any url ending with given extensions
 
+    page.on('request', request=> console.log("REQUEST: "+ request.url()));   // log all request call urls
+    page.on('response', response=> console.log("RESPONSE: "+ response.url(), response.status()));   // log all response call urls & response status codes
+
     // login
     await username.fill('rahulshettyacademy');
     await password.fill('learning');
     await signIn.click();
-    await page.pause();
     console.log("Successfully aborted network calls ending with {jpg, png, jpeg} extensions");   // loaded page without product images.
 });
