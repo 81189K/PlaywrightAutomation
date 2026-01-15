@@ -47,7 +47,7 @@ test('001TC: Intercepted network response calls with playwright route() method',
             await route.fulfill({
                 response,
                 body
-            }); // fulfill(): sending response back to browser
+            }); // fulfill(): to modify API Response
         }
     );
 
