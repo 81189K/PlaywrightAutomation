@@ -121,5 +121,8 @@ test('003TC: Abort Network calls', async ({ page }) => {
     await username.fill('rahulshettyacademy');
     await password.fill('learning');
     await signIn.click();
+    await page.locator(".card-title").first().waitFor();
+    const milliseconds = Date.now();    // Unix Epoch time in milliseconds
+    await page.screenshot({path: `screenshots/screenshot_${milliseconds}.png`});
     console.log("Successfully aborted network calls ending with {jpg, png, jpeg} extensions");   // loaded page without product images.
 });
