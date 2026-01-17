@@ -8,5 +8,6 @@ node_modules/
 /playwright/.auth/
 /tests/data
 /screenshots/*.png
+tests/*-snapshots/
 
 .DS_Store

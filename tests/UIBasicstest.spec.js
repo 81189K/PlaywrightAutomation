@@ -257,3 +257,26 @@ test('014TC: Handling Frames - frameLocator()', async ({ page }) => {
     await page.locator("#opentab").click();
     console.log("DONE");
 });
+
+test('015TC: Visual Testing', async ({ page }) => {
+
+    // Failure case:
+    //**************
+    // await page.goto('https://flightaware.com/');
+    // expect(await page.screenshot()).toMatchSnapshot('landing.png'); // fails in first run, cause no expected screenshot.
+    // // Error: A snapshot doesn't exist at /Users/hariprasad.kunde/Documents/workspace/PlaywrightAutomation/tests/UIBasicstest.spec.js-snapshots/landing-darwin.png, writing actual.
+    // // But playwright captures the initial screenshot and stores it to comapre in further run.
+
+    // /***
+    //  * toMatchSnapshot('landing.png') expects an existing baseline snapshot.
+    //  * Since landing.png does not exist yet, Playwright throws:
+    //  * A snapshot doesn't exist … writing actual.
+    //  * Playwright does write the snapshot, but still fails the test to make the baseline creation explicit.
+    //  * On subsequent runs, the screenshot is compared against that stored baseline.
+    //  */
+
+    // Success case:
+    //**************
+    await page.goto('https://www.w3schools.com/');
+    expect(await page.screenshot()).toMatchSnapshot('w3landing.png');
+});
