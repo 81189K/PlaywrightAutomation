@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import POManager from '../pageObjects/POManager';
 var testData = require("../data/clientAppPOTestData.json");
 
+import {customTest} from '../utils/CustomTestFixture';
+
 
 test('001TC: Client App E2E flow - Page Object Pattern Implementation', async ({page}) => {
     // variables
@@ -41,4 +43,26 @@ test('001TC: Client App E2E flow - Page Object Pattern Implementation', async ({
     await myOrdersPage.viewOrderDetails(orderID);
     await myOrdersPage.verifyOrderID(orderID);
     console.log("TEST PASSED");
+});
+
+customTest('002TC: Pass test data as fixture by extending test annotation behaviour', async ({page, testDataForOrder}) => {
+    // variables
+    const emailID = testDataForOrder.emailID;
+    const password = testDataForOrder.password
+    const requiredProduct = testDataForOrder.requiredProduct;
+
+    const app = new POManager(page);
+    // LoginPage
+    await app.getLoginPage().goToLandingURL();
+    await app.getLoginPage().validLogin(emailID, password);
+ 
+    // DashboardPage
+    await app.getDashboardPage().waitForProductsToLoad();
+    await app.getDashboardPage().addProductToCart(requiredProduct);
+    await app.getDashboardPage().navigateToCart();
+
+    // CartPage
+    const isPresentInCart = await app.getCartPage().isProductPresentInCart(requiredProduct);
+    expect(isPresentInCart).toBeTruthy();
+    console.log("Custom test Fixture script PASSED");
 });
