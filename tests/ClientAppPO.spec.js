@@ -1,12 +1,13 @@
 import { test, expect } from '@playwright/test';
 import POManager from '../pageObjects/POManager';
+var testData = require("../data/clientAppPOTestData.json");
 
 
 test('001TC: Client App E2E flow - Page Object Pattern Implementation', async ({page}) => {
     // variables
-    const emailID = 'testerone@email.com';
-    const password = 'testerOne1';
-    const requiredProduct = "ADIDAS ORIGINAL";
+    const emailID = testData.emailID;
+    const password = testData.password
+    const requiredProduct = testData.requiredProduct;
 
     const app = new POManager(page);
     // LoginPage
