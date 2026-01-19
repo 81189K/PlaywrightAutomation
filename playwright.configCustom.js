@@ -39,8 +39,9 @@ export default defineConfig({
       use: {
         ignoreHTTPSErrors: true,
         browserName: 'chromium',
-        screenshot: 'on',
-        trace: 'retain-on-failure', // on, off
+        screenshot: 'on', // off, only-on-failure
+        video: 'retain-on-failure', // on, off, on-first-retry, retain-on-failure
+        trace: 'on', // on, off, on-first-retry, retain-on-failure (logs)
         headless: false,
         viewport: {width:1080, height:720} // use for web responsive testing
       },
