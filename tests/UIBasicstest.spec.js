@@ -21,8 +21,10 @@ test('Third Testcase: Locators: Invalid login', async ({ page }) => {
     console.log("Page Title is: " + pageTitle);
     
     // locator: selectors= css, xpath
-    await page.locator('#username').fill('rahulshettyacademy1'); // type() is deprecated, so use: fill()
-    await page.locator('input[type="password"]').fill('learning');
+    const userName = await page.locator(".text-center b").first().textContent();
+    const pwd = await page.locator(".text-center b").last().textContent();
+    await page.locator('#username').fill(userName+"1"); // type() is deprecated, so use: fill()
+    await page.locator('input[type="password"]').fill(pwd);
     await page.locator('#signInBtn').click();
 
     // auto-wait
@@ -41,8 +43,10 @@ test('Fourth Testcase: Locators: Invalid+Valid login', async ({ page }) => {
     const cardTitles = page.locator('.card-body a');
 
     // Invalid login
-    await username.fill('rahulshettyacademy1');
-    await password.fill('learning');
+    const userName = await page.locator(".text-center b").first().textContent();
+    const pwd = await page.locator(".text-center b").last().textContent();
+    await username.fill(userName+"1");
+    await password.fill(pwd);
     await signIn.click();
     // validate error msg
     await expect(page.locator("[style*='block']")).toContainText('Incorrect');  // await expect(locator).toContainText("abc");
@@ -139,6 +143,8 @@ test('009TC: Handling child windows', async () => {
 
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
 
+    const pwd = await page.locator(".text-center b").last().textContent();
+
     // Blinking text locator
     const blinkingLink = page.locator("[href*='documents-req']");
     
@@ -161,7 +167,7 @@ test('009TC: Handling child windows', async () => {
     expect(enteredText).toEqual(userName);
     console.log("usernames matched");
     // inputValue example - END
-    await page.locator('input[type="password"]').fill('learning');
+    await page.locator('input[type="password"]').fill(pwd);
     await page.waitForTimeout(2000);
     await page.locator('#signInBtn').click();
     await page.waitForTimeout(5000);

@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 let webContext;
-let orderID;
 const requiredProduct = "ADIDAS ORIGINAL";
 
 test.beforeAll(async ({browser}) => {
@@ -13,8 +12,8 @@ test.beforeAll(async ({browser}) => {
     await page.locator('#login').click();
     // await page.waitForLoadState('networkidle');
     await page.locator('.card-body b').first().waitFor();
-    await context.storageState({path: 'tests/data/state.json'});
-    webContext = await browser.newContext({storageState: 'tests/data/state.json'});
+    await context.storageState({path: 'data/state.json'});
+    webContext = await browser.newContext({storageState: 'data/state.json'});
 });
 
 test('001TC: Client App E2E flow1 using storageState()', async () => { 
@@ -27,7 +26,7 @@ test('001TC: Client App E2E flow1 using storageState()', async () => {
     console.log("001TC: All Items: "+ titles);
 });
 
-test('002TC: Client App E2E flow2 - add to cart', async () => { 
+test('002TC: Client App E2E flow', async () => { 
     const page = await webContext.newPage();
     await page.goto('https://rahulshettyacademy.com/client');
 
@@ -43,12 +42,7 @@ test('002TC: Client App E2E flow2 - add to cart', async () => {
             break;
         }
     }
-    console.log("002TC: "+ requiredProduct + " is added to cart");
-});
-
-test('003TC: Client App E2E flow3 - checkout', async () => { 
-    const page = await webContext.newPage();
-    await page.goto('https://rahulshettyacademy.com/client');
+    console.log(requiredProduct + " is added to cart");
 
     // locator variables, for reuse.
     const emaiID = 'testerone@email.com';
@@ -84,13 +78,8 @@ test('003TC: Client App E2E flow3 - checkout', async () => {
     // assert Thankyou msg
     await expect(page.locator(".hero-primary")).toContainText("Thankyou");
 
-    orderID = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
-    console.log("003TC: Placed order with order id: "+ orderID);
-});
-
-test('004TC: Client App E2E flow4 - My Orders', async () => { 
-    const page = await webContext.newPage();
-    await page.goto('https://rahulshettyacademy.com/client');
+    let orderID = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
+    console.log("Placed order with order id: "+ orderID);
 
     // My Orders
     await page.locator("button[routerlink='/dashboard/myorders']").click();
@@ -105,5 +94,5 @@ test('004TC: Client App E2E flow4 - My Orders', async () => {
     }
 
     expect(orderID).toContain(await page.locator("div.col-text").textContent());
-    console.log("004TC: TEST PASSED");
+    console.log("TEST PASSED");
 });

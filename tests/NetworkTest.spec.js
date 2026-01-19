@@ -1,5 +1,5 @@
 import { test, expect, request } from '@playwright/test';
-import { APIUtils } from './utils/APIUtils';
+import { APIUtils } from '../utils/APIUtils';
 
 let createdOrderDetails = {};
 let fakeEmptyResponsePayload = { data: [], message: "No Orders" };
@@ -118,8 +118,10 @@ test('003TC: Abort Network calls', async ({ page }) => {
     // page.on('response', response=> console.log("RESPONSE: "+ response.url(), response.status()));   // log all response call urls & response status codes
 
     // login
-    await username.fill('rahulshettyacademy');
-    await password.fill('learning');
+    const userName = await page.locator(".text-center b").first().textContent();
+    const pwd = await page.locator(".text-center b").last().textContent();
+    await username.fill(userName);
+    await password.fill(pwd);
     await signIn.click();
     await page.locator(".card-title").first().waitFor();
     const milliseconds = Date.now();    // Unix Epoch time in milliseconds

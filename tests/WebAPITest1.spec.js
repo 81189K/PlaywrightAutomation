@@ -1,5 +1,5 @@
 import { test, expect, request } from '@playwright/test';
-import { APIUtils } from './utils/APIUtils';
+import { APIUtils } from '../utils/APIUtils';
 
 let createdOrderDetails = {};
 const loginPayload = {
