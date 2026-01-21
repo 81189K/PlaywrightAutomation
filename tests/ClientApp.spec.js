@@ -124,13 +124,13 @@ test.describe.serial('Client App UI Basic Tests', () => {
         await page.goto('https://rahulshettyacademy.com/client');
 
         // locator variables, for reuse.
-        const emaiID = 'testerone@email.com';
+        const emaiID = 'testertwo@email.com';
         const products = page.locator('.card-body');
         const cardTitles = page.locator('.card-body b');
 
         // login
         await page.getByPlaceholder("email@example.com").fill(emaiID);
-        await page.getByPlaceholder("enter your passsword").fill('testerOne1');
+        await page.getByPlaceholder("enter your passsword").fill('testerTwo2');
         await page.getByRole("button", { name: "loGin" }).click();
 
         // waitFor() waits for single element; so using first()
