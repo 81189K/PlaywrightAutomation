@@ -26,7 +26,9 @@ test.beforeAll(async () => {
     console.log("Order id: "+ createdOrderDetails.orderID);
 });
 
-test('First Testcase: Client App API test', async ({ page }) => {
+// tag at title level
+// npx playwright test --grep @API
+test('@API First Testcase: Client App API test', async ({ page }) => {
     // set token in localStorage
     page.addInitScript(value => {
         window.localStorage.setItem('token', value);
