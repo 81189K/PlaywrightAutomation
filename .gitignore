@@ -15,3 +15,6 @@ tests/*-snapshots/
 #allure reporting
 allure-results/
 allure-report/
+
+#jenkin files
+jenkins.war
