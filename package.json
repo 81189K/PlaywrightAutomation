@@ -15,6 +15,7 @@
     "allure-playwright": "^3.4.5"
   },
   "dependencies": {
+    "allure-commandline": "^2.36.0",
     "exceljs": "^4.4.0"
   }
 }
