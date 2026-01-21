@@ -7,6 +7,8 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   retries: 1, // reruns failed testcases n times
+  workers: 2, // parallel threads (parallel test file executor); default #coresOnMachine/2
+  // *** Playwright runs test files in parallel (across workers), but tests inside a single file run sequentially by default. ***
   timeout: 40 * 1000, // 40 seconds, default is 30 seconds
   expect: {
     timeout: 10000 // 10 seconds, default is 5 seconds
