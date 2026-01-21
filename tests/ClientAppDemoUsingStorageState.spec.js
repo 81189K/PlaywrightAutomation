@@ -7,8 +7,8 @@ test.beforeAll(async ({browser}) => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto('https://rahulshettyacademy.com/client');
-    await page.locator('#userEmail').fill('testerone@email.com');
-    await page.locator('#userPassword').fill('testerOne1');
+    await page.locator('#userEmail').fill('testerfour@email.com');
+    await page.locator('#userPassword').fill('testerFour4');
     await page.locator('#login').click();
     // await page.waitForLoadState('networkidle');
     await page.locator('.card-body b').first().waitFor();
@@ -45,7 +45,7 @@ test('002TC: Client App E2E flow', async () => {
     console.log(requiredProduct + " is added to cart");
 
     // locator variables, for reuse.
-    const emaiID = 'testerone@email.com';
+    const emaiID = 'testerfour@email.com';
 
     // My Cart
     await page.locator("button[routerlink='/dashboard/cart']").click();

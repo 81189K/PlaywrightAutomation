@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test tests/WebAPITest1.spec.js"
+    "test": "npx playwright test tests/WebAPITest1.spec.js",
+    "smoke": "npx playwright test --grep @smoke",
+    "APITests": "npx playwright test --grep @API",
+    "chromeTests": "npx playwright test --config playwright.configCustom.js --project=chrome"
   },
   "keywords": [],
   "author": "",
