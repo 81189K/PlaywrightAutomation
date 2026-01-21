@@ -16,7 +16,7 @@ test.beforeAll(async ({browser}) => {
     webContext = await browser.newContext({storageState: 'data/state.json'});
 });
 
-test('001TC: Client App E2E flow1 using storageState()', async () => { 
+test('@smoke 001TC: Client App E2E flow1 using storageState()', async () => { 
     const page = await webContext.newPage();
     await page.goto('https://rahulshettyacademy.com/client');
 

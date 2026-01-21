@@ -18,7 +18,7 @@ test('Second Testcase: Page Fixture Playwright test', async ({ page }) => {
     await expect(page).toHaveTitle("Google"); //Assertion to verify the page title contains 'Google'
 });
 
-test('Third Testcase: Locators: Invalid login', async ({ page }) => { 
+test('@smoke Third Testcase: Locators: Invalid login', async ({ page }) => { 
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
     const pageTitle = await page.title();
     console.log("Page Title is: " + pageTitle);

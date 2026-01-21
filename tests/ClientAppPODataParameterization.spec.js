@@ -3,7 +3,7 @@ import POManager from '../pageObjects/POManager';
 var testData = require("../data/clientAppPODataParameterizationTestData.json");
 
 for (const data of testData) {
-    test(`Client App E2E flow - for ${data.requiredProduct}`, async ({ page }) => {
+    test(`@smoke Client App E2E flow - for ${data.requiredProduct}`, async ({ page }) => {
         // variables
         const emailID = data.emailID;
         const password = data.password
