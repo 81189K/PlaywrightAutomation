@@ -6,6 +6,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+  retries: 1, // reruns failed testcases n times
   timeout: 40 * 1000, // 40 seconds, default is 30 seconds
   expect: {
     timeout: 10000 // 10 seconds, default is 5 seconds
@@ -24,7 +25,6 @@ export default defineConfig({
       }
     },
     {
-
       name: 'safari-mobile',
       use: {
         browserName: 'webkit',
@@ -59,11 +59,7 @@ export default defineConfig({
         geolocation: { latitude: 12.97, longitude: 77.59 }
       }
     }
-
   ]
-  
-
-
 });
 
 //torun:

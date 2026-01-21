@@ -55,7 +55,7 @@ customTest('002TC: Pass test data as fixture by extending test annotation behavi
     // LoginPage
     await app.getLoginPage().goToLandingURL();
     await app.getLoginPage().validLogin(emailID, password);
- 
+    // await page.waitForTimeout(2000);    // for debugging purpose:retires
     // DashboardPage
     await app.getDashboardPage().waitForProductsToLoad();
     await app.getDashboardPage().addProductToCart(requiredProduct);
