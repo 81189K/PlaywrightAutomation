@@ -137,7 +137,7 @@ test('008TC: Blinking text assertion', async ({ page }) => {
 });
 
 test('009TC: Handling child windows', async () => { 
-    const browser = await chromium.launch();
+    const browser = await chromium.launch(); // chromium.launch() -Manual browser launch bypasses your test config —that ignores playwright.configCustom.js so viewport/launch args there are not applied.
     const context = await browser.newContext();
     const page = await context.newPage();
 

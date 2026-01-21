@@ -100,9 +100,9 @@ test('002TC: Security test for network request intercept', async ({ page }) => {
 });
 
 test('003TC: Abort Network calls', async ({ page }) => { 
-    await page.setViewportSize({ width: 1920, height: 1080 }); // Run with full available screen: Deterministic, CI-friendly, Cross-browser stable
+    await page.setViewportSize({ width: 1920, height: 1080 }); // Run with specified dimensions: Deterministic, CI-friendly, Cross-browser stable
     // can configure the same in config.js file
-    // BEST PRACTICE: use setViewportSize()
+    // ***NOTE: page.setViewportSize can override config defaults per-test.
     await page.goto('https://rahulshettyacademy.com/loginpagePractise/');
 
     // locator variables, for reuse.
