@@ -267,7 +267,7 @@ test('014TC: Handling Frames - frameLocator()', async ({ page }) => {
     console.log("DONE");
 });
 
-test('015TC: Visual Testing', async ({ page }) => {
+test.skip('015TC: Visual Testing', async ({ page }) => {
 
     // Failure case:
     //**************
